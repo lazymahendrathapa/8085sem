@@ -1,0 +1,6 @@
+pandey:mov a,b
+bibek:mvi a, 22
+lxi b, 90AA
+ldax b 
+jc bibek 
+jmp pandey 
