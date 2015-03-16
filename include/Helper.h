@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <cmath>
+#include <sstream>
 
 namespace Helper
 {
@@ -113,7 +114,7 @@ namespace Helper
 		for(int i=hex.length()-1;i>=0;i--)
 		{
 			if(!IsHex(hex[i]))
-				throw 2; // value error
+				throw "value error in toDec()"; // value error
 			if(!IsDigit(hex[i]))
 				sum+=((hex[i]-'A'+10)*pow(16,power));
 			else
@@ -135,5 +136,30 @@ namespace Helper
 		for(int i=0;i<str.length();i++)
 			if(!IsDigit(str[i])) return false;
 		return true;
+	}
+
+	inline std::string ToHexStr(int i)
+	{
+		// j payo tei vayo yo. kaam garcha
+		std::string s;
+		std::stringstream ss, ssss;
+
+		int cnt =0;
+
+		while(i!=0)
+		{
+			int rem = i%16;
+			ss << char(rem<10?'0'+rem : 'A' + rem-10);
+			cnt+=1;
+			i = i/16;
+		}
+		ss >> s;
+		for(int i=s.length()-1;i>=0;i--)
+			ssss << s[i];
+		s="";
+		ssss >> s;
+        if(s.length()==1)
+            s= "0"+s;
+		return s;
 	}
 }
